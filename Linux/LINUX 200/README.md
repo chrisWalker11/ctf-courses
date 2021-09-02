@@ -79,7 +79,80 @@ Now, this is obviously not an exhaustive list because that would take up an infe
 To be completed
 
 ## File Permissions
-To be completed
+Files and Directories each have assigned rights for the owner of the file, members of the group and related users as well as everybody else. Ownership of files can be broken down into 3 Parts
+
+  USER
+    A user is the owner of the file the person who created the file becomes the owner
+    
+  GROUP
+    A user group can contain multiple users in it so that all users in a group can have access to said file with out having to have to manually assign accces to each individual
+    
+    All users
+      Any other user who has access to the file they neither created or belongs to a group also know as world permissions
+      
+  how does linux determine between these three user types so that one user does not impact anothers file. This is where permissions come into play
+  
+  Permissions can be broken down into 3 parts
+    
+      READ (4)
+        This gives you the ability to open and read a file. access with a directory gives you the ability to read its content 
+        
+      WRITE (2)
+        refers to the ability a user's ability to write or modify a file or directory
+        
+       EXECUTE(1)
+         affects the abiltiy of a user to execute a file or view the contents of a directory
+         
+    Viewing the permissions
+        You can view the permissions with the ls -l 
+        
+ | '$ls -l testfile'|
+-rwxrwxr--  1 amrood   users 1024  Nov 2 00:10  testfile
+
+<p align="center">
+    <img src="https://linuxcommand.org/images/file_permissions.png" width=75%  height=75%><br>
+    <em>source: https://linuxconfig.org/filesystem-basics</em>
+</p>
+
+
+Advanced Permissions
+
+The special permissions flag can be marked with any of the following:
+
+    _ – no special permissions
+    d – directory
+    l– The file or directory is a symbolic link
+    s – This indicated the setuid/setgid permissions. This is not set displayed in the special permission part of the permissions display, but is represented as a s in the read portion of the owner or group permissions.
+    t – This indicates the sticky bit permissions. This is not set displayed in the special permission part of the permissions display, but is represented as a t in the executable portion of the all users permissions
+
+
+The chmod command is used to change the permissions of a file or directory. To use it, we specify the desired permission settings and the file or files that we wish to modify. There are two ways to specify the permissions. In this lesson we will focus on one of these, called the octal notation method.
+
+It is easy to think of the permission settings as a series of bits (which is how the computer thinks about them). Here's how it works:
+
+
+       | number | Permission type        | symbol |
+|--------|------------------------|--------|
+| 0      | no permission          | -      |
+| 1      | execute                | -x     |
+| 2      | write                  | -w-    |
+| 3      | execute+write          | -wx    |
+| 4      | read                   | r-     |
+| 5      | read + execute         | r-w    |
+| 6      | read + write           | rw-    |
+| 7      | read + write + execute | rwx    |
+
+These are the numerical and character assigments for the respective permission types
+
+Value 	Meaning
+777 	(rwxrwxrwx) No restrictions on permissions. Anybody may do anything. Generally not a desirable setting.
+755 	(rwxr-xr-x) The file's owner may read, write, and execute the file. All others may read and execute the file. This setting is common for programs that are used by all users.
+700 	(rwx------) The file's owner may read, write, and execute the file. Nobody else has any rights. This setting is useful for programs that only the owner may use and must be kept private from others.
+666 	(rw-rw-rw-) All users may read and write the file.
+644 	(rw-r--r--) The owner may read and write a file, while all others may only read the file. A common setting for data files that everybody may read, but only the owner may change.
+600 	(rw-------) The owner may read and write a file. All others have no rights. A common setting for data files that the owner wants to keep private. 
+these are some common configurations 
+
 
 ## Practice
 - https://tryhackme.com/room/linuxfundamentalspart1
